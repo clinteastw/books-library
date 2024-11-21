@@ -4,8 +4,7 @@ from books import Book
 
 
 class BooksLibrary:
-    """Класс управления библиотекой
-    """
+    """Класс управления библиотекой"""
     
     def __init__(self) -> dict:
         self.books = {}
@@ -47,14 +46,17 @@ class BooksLibrary:
     def delete_book(self, id: str):
         """Удаление книги по id"""
         
-        if id in self.books:
-            del self.books[str(id)]
-            self.save_to_file()
-            print("---------------------------------")
-            print("Книга удалена из библиотеки")
-        else:
-            print("---------------------------------")
-            print("Книги с таким id нет в библиотеке")
+        try:
+            if id in self.books:
+                del self.books[str(id)]
+                self.save_to_file()
+                print("---------------------------------")
+                print("Книга удалена из библиотеки")
+            else:
+                print("---------------------------------")
+                raise KeyError("Книги с таким id нет в библиотеке")
+        except KeyError as e:
+            print(f"{e}")
             
     def search_books(self, query: str | int):
         """Поиск книги по названию, автору или году издания"""
@@ -81,11 +83,14 @@ class BooksLibrary:
     def update_book_status(self, id: str, new_status: str):
         """Изменение статуса книги: В наличии/Выдана"""
         
-        if str(id) in self.books:
-            self.books[str(id)].status = new_status
-            self.save_to_file()
-            print("---------------------------------")
-            print("Статус книги успешно обновлен")
-        else:
-            print("---------------------------------")
-            print("Такой книги нет в библиотеке")
+        try:
+            if str(id) in self.books:
+                self.books[str(id)].status = new_status
+                self.save_to_file()
+                print("---------------------------------")
+                print("Статус книги успешно обновлен")
+            else:
+                print("---------------------------------")
+                raise KeyError("Такой книги нет в библиотеке")
+        except KeyError as e:
+            print(f"{e}")
