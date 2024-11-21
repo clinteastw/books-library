@@ -58,7 +58,7 @@ class BooksLibrary:
         except KeyError as e:
             print(f"{e}")
             
-    def search_books(self, query: str | int):
+    def search_books(self, query: str):
         """Поиск книги по названию, автору или году издания"""
         
         books_found = [book for book in self.books.values() \
@@ -72,6 +72,8 @@ class BooksLibrary:
         else:
             print("---------------------------------")
             print("Не нашлось книг по вашему запросу")
+        
+        return [books for books in books_found]
             
     def list_all_books(self):
         """Получение списка всех книг"""
