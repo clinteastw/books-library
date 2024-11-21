@@ -68,6 +68,7 @@ class BooksLibrary:
         
         if books_found:
             for book in books_found:
+                print("---------------------------------")
                 print(book)
         else:
             print("---------------------------------")
